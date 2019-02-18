@@ -1,0 +1,12 @@
+<script>
+        function GetRequest(){var url=location.search;var theRequest=new Object();if(url.indexOf("?")!=-1){var str=url.substr(1);strs=str.split("&");for(var i=0;i<strs.length;i++){theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);}}
+        return theRequest;}
+        var urlparams=GetRequest();if(urlparams){var showtype=urlparams.showtype;var testmode=urlparams.testmode;var sysdate=urlparams.sysdate;var selectshowtype=document.getElementsByName('showtype');for(var i=0;i<selectshowtype.length;i++){if(selectshowtype[i].value==showtype){selectshowtype[i].checked=true;if(selectshowtype[i].value=="fix"){document.getElementById("thtest").style.visibility="collapse";document.getElementById("tdtest").style.visibility="collapse";}else{document.getElementById("thtest").style.visibility="visible";document.getElementById("tdtest").style.visibility="visible";}}}
+        var selecttestsmode=document.getElementsByName('testMode');for(var i=0;i<selecttestsmode.length;i++){if(selecttestsmode[i].value==testmode){selecttestsmode[i].checked=true;break;}}
+        var unixtimestamp=new Date(sysdate*1000);var commonTime=unixtimestamp.toUTCString();document.getElementById("spCurrent").innerHTML=commonTime;}
+        function submit(){var selectshowtype=document.getElementsByName('showtype');var showtypevalue="";for(var i=0;i<selectshowtype.length;i++){if(selectshowtype[i].checked){showtypevalue=selectshowtype[i].value;break;}}
+        var selecttestmode=document.getElementsByName('testMode');var testmodevalue="";for(var i=0;i<selecttestmode.length;i++){if(selecttestmode[i].checked){testmodevalue=selecttestmode[i].value;break;}}
+        var str=document.getElementById('txtsysdate').value;str=str.replace(/-/g,"/");var date=new Date(str);var humanDate=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds()));var unixDate=humanDate.getTime()/1000;var url="pwmopr?showtype="+showtypevalue+"&testmode="+testmodevalue+"&sysdate="+unixDate;window.location.href=url;}
+        function start(){var url="start";window.location.href=url;}
+        function test(){alert("hello world!");}
+            </script>
